@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>จดหมายถึงที่รัก 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family:"Noto Sans Thai",sans-serif;
+  background:linear-gradient(180deg,#ffe6ea,#fff);
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+.card{
+  max-width:760px;
+  background:#fff;
+  border-radius:26px;
+  box-shadow:0 14px 40px rgba(0,0,0,.18);
+  padding:30px;
+  text-align:center;
+}
+
+/* เอฟเฟกต์เลื่อนแล้วค่อยโชว์ */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .9s ease;
+}
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1{ color:#e63946; }
+
+/* ---------- กรอบหัวใจ ---------- */
+.heart-frame{
+  width:300px;
+  height:280px;
+  margin:30px auto;
+  position:relative;
+  transform:rotate(-45deg);
+  overflow:hidden;
+}
+.heart-frame::before,
+.heart-frame::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:#fff;
+  border-radius:50%;
+}
+.heart-frame::before{
+  top:-150px; left:0;
+}
+.heart-frame::after{
+  left:150px; top:0;
+}
+.heart-frame img{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:rotate(45deg) scale(1.15);
+}
+
+/* ---------- สไลด์ ---------- */
+.slider{
+  position:relative;
+}
+.slide{
+  display:none;
+}
+.slide.active{
+  display:block;
+}
+.slider-btn{
+  margin:10px;
+  padding:8px 16px;
+  border:none;
+  border-radius:20px;
+  background:#e63946;
+  color:#fff;
+  cursor:pointer;
+}
+
+.letter{
+  text-align:left;
+  font-size:18px;
+  line-height:1.8;
+  white-space:pre-wrap;
+  margin-top:20px;
+}
+.from{
+  margin-top:30px;
+  text-align:right;
+  font-weight:bold;
+}
+
+iframe{
+  border-radius:16px;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1 class="reveal">ถึง ที่รัก 💖</h1>
+
+  <!-- สไลด์รูปในกรอบหัวใจ -->
+  <div class="slider reveal">
+    <div class="heart-frame slide active">
+      <img src="love1.jpg">
+    </div>
+    <div class="heart-frame slide">
+      <img src="love2.jpg">
+    </div>
+    <div class="heart-frame slide">
+      <img src="love3.jpg">
+    </div>
+
+    <button class="slider-btn" onclick="prev()">◀</button>
+    <button class="slider-btn" onclick="next()">▶</button>
+  </div>
+
+  <!-- จดหมาย -->
+  <div class="letter reveal">
+ขอบคุณนะ  
+ขอบคุณที่ยังอยู่ด้วยกันจนถึงสิ้นปี  
+ไม่ว่าเราจะทะเลาะกัน งอนกัน หรือมีวันที่เหนื่อยแค่ไหน  
+เธอก็ยังไม่ไปไหน  
+
+ขอบคุณสำหรับทุกความอดทน  
+ทุกกำลังใจ  
+ทุกช่วงเวลาที่จับมือกันไว้  
+
+ถ้าไม่มีเธอ  
+ปีนี้คงไม่ใช่ปีที่อบอุ่นขนาดนี้  
+
+รักนะ และอยากมีเธอในทุก ๆ ปีต่อจากนี้ 🤍
+  </div>
+
+  <div class="from reveal">
+    ด้วยรักเสมอ<br>จากเรา
+  </div>
+
+  <!-- เพลง -->
+  <div class="reveal" style="margin-top:40px;">
+    <p>🎵 เพลงนี้สำหรับเธอ</p>
+    <iframe width="320" height="180"
+      src="https://www.youtube.com/embed/wigSp2Nl9dI"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+</div>
+
+<script>
+/* เลื่อนแล้วโชว์ */
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+});
+reveals.forEach(r=>observer.observe(r));
+
+/* สไลด์รูป */
+let index=0;
+const slides=document.querySelectorAll('.slide');
+function show(i){
+  slides.forEach(s=>s.classList.remove('active'));
+  slides[i].classList.add('active');
+}
+function next(){
+  index=(index+1)%slides.length;
+  show(index);
+}
+function prev(){
+  index=(index-1+slides.length)%slides.length;
+  show(index);
+}
+</script>
+
+</body>
+</html>
